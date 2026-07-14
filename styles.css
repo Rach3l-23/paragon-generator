@@ -232,9 +232,6 @@ background-size:175mm;
     page-break-after: auto;
     break-after: auto;
   }
-	.printPaymentValue{
-    grid-column:2;
-}
 }
 .receipt-body{
     display:flex;
