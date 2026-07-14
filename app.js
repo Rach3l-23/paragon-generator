@@ -472,8 +472,15 @@ printPdf.addEventListener("click", () => {
     const oldTitle = document.title;
     document.title =
         `Paragon nr ${document.querySelector("#receiptPrefix").textContent}${receiptNumber.value}`;
-    window.print();
-    document.title = oldTitle;
+
+    setTimeout(() => {
+        window.print();
+        document.title = oldTitle;
+    }, 150);
+
+});
+
+window.addEventListener("afterprint", () => {
     restorePrintView();
 });
 addRow.addEventListener("click", () => {
