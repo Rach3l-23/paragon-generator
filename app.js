@@ -399,14 +399,21 @@ function preparePrintView() {
         select.style.display = "none";
     });
 	// Data sprzedaży
-	const saleDate = document.querySelector("#saleDate");
-	const dateSpan = document.createElement("span");
-	dateSpan.className = "printDateValue";
-	const [year, month, day] = saleDate.value.split("-");
-	dateSpan.textContent = `${day}.${month}.${year}`;
-	saleDate.after(dateSpan);
-	saleDate.style.visibility = "hidden";
-saleDate.style.position = "absolute";
+	document.querySelectorAll(".saleDateInput").forEach(input => {
+
+    const span = document.createElement("span");
+
+    span.className = "printDateValue";
+
+    const [year, month, day] = input.value.split("-");
+
+    span.textContent = `${day}.${month}.${year}`;
+
+    input.after(span);
+
+    input.style.display = "none";
+
+});
 	// Forma płatności
 	document.querySelectorAll(".paymentSelect").forEach(select => {
 
@@ -433,9 +440,9 @@ function restorePrintView() {
     document.querySelectorAll(".printDateValue, .printPaymentValue")
         .forEach(span => span.remove());
 
-    const saleDate = document.querySelector("#saleDate");
-    saleDate.style.visibility = "";
-    saleDate.style.position = "";
+    document.querySelectorAll(".saleDateInput").forEach(input => {
+    input.style.display = "";
+});
 
     document.querySelectorAll(".paymentSelect").forEach(select => {
         select.style.display = "";
