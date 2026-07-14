@@ -165,10 +165,19 @@ background-size:175mm;
     vertical-align:middle;
     box-sizing:border-box;
 }
-.receipt-table select{
-    min-height: unset;
-    height: 15px;
-    line-height: 15px;
+.receipt-table select,
+.payment-info select{
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    border:none;
+    background:transparent;
+    padding:0;
+    margin:0;
+    width:100%;
+    font:inherit;
+    color:inherit;
+    outline:none;
 }
   .controls {
     display: none;
