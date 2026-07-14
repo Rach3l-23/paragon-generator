@@ -408,28 +408,39 @@ function preparePrintView() {
 	saleDate.style.visibility = "hidden";
 saleDate.style.position = "absolute";
 	// Forma płatności
-	const payment = document.querySelector("#paymentMethod");
-	const paymentSpan = document.createElement("span");
-	paymentSpan.className = "printPaymentValue";
-	paymentSpan.textContent = payment.options[payment.selectedIndex].text;
-	payment.after(paymentSpan);
-	payment.style.visibility = "hidden";
-payment.style.position = "absolute";
+	document.querySelectorAll(".paymentSelect").forEach(select => {
+
+    const span = document.createElement("span");
+
+    span.className = "printPaymentValue";
+
+    span.textContent = select.options[select.selectedIndex].text;
+
+    select.after(span);
+
+    select.style.display = "none";
+
+});
 }
 function restorePrintView() {
+
     document.querySelectorAll(".printSelectValue").forEach(span => span.remove());
+
     document.querySelectorAll(".productSelect, .quantitySelect").forEach(select => {
         select.style.display = "";
     });
-	document.querySelectorAll(".printDateValue, .printPaymentValue")
-    .forEach(span => span.remove());
-	const saleDate = document.querySelector("#saleDate");
-saleDate.style.visibility = "";
-saleDate.style.position = "";
 
-const payment = document.querySelector("#paymentMethod");
-payment.style.visibility = "";
-payment.style.position = "";
+    document.querySelectorAll(".printDateValue, .printPaymentValue")
+        .forEach(span => span.remove());
+
+    const saleDate = document.querySelector("#saleDate");
+    saleDate.style.visibility = "";
+    saleDate.style.position = "";
+
+    document.querySelectorAll(".paymentSelect").forEach(select => {
+        select.style.display = "";
+    });
+
 }
 function validateReceipt() {
 
