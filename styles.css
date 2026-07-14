@@ -148,6 +148,9 @@ background-size:175mm;
     padding:0;
 
 }
+.payment-row input{
+    display:none !important;
+}
 
 .signatureInput:empty::before{
 
