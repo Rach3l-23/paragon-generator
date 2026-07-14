@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Generator Paragonów Inkubator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="controls" aria-label="Panel generatora">
+        <h1>Inkubator Paragon</h1> 
+		<div class="button-row">
+           <button id="printPdf" type="button">Zapisz PDF</button>
+        </div>
+        <label class="file-picker" style="visibility: hidden">
+          <span>Plik CSV</span>
+          <input id="csvFile" type="file" accept=".csv,text/csv">
+        </label>
+        <label class="field" style="visibility: hidden">
+          <select id="characterSelect"></select>
+        </label>
+      </aside>
+      <section class="preview-wrap">
+		<article id="receipt" class="page">
+				<header class="receipt-header">
+					<section class="seller">
+						<h3>Sprzedawca:</h3>
+						<p>Inkubator Sp. z o.o.</p>
+						<p>ul. Zielony Las 48/2</p>
+						<p>03-985 Warszawa</p>
+						<p>NIP 7393882198</p>
+						<p>REGON 36374658600000</p>
+						<p>sklep@inkubatorpiwt.com</p>
+					</section>
+					<section class="buyer">
+						<h3>Nabywca:</h3>
+						<textarea id="buyerData" class="buyer-box" style= "margin-top: -3.5px" placeholder="Wpisz dane nabywcy..."></textarea>
+					</section>
+					<section class="dates">
+					<h3>Miejsce i data wystawienia:</h3>
+						<p>Warszawa</p>
+						<p id="receiptDate">08.07.2026</p>
+					</section>
+				</header>
+				<section class="receipt-body">
+					<h2 class="receipt-title">Paragon nr
+						<span id="receiptPrefix"></span>
+						<input id="receiptNumber" type="text" value="01" maxlength="4">
+					</h2>
+					<table class="receipt-table">
+						<thead>
+							<tr>									
+								<th>Lp</th>
+								<th>Nazwa</th>
+								<th>Cena netto</th>
+								<th>Ilość</th>
+								<th>Wartość netto</th>
+								<th>VAT</th>
+								<th>Kwota VAT</th>
+								<th>Wartość brutto</th>
+							</tr>
+						</thead>
+					<tbody id="receiptRows">
+					</tbody>
+					</table>
+					<div>		
+					<div class="receipt-totals-wrapper">
+						<table class="receipt-totals">
+							<tr>
+								<td class="labelCell">Razem</td>
+								<td id="totalNetto">0.00</td>
+								<td></td>
+								<td id="totalVat">0.00</td>
+								<td id="totalBrutto">0.00</td>
+							</tr>
+						</table>
+					</div>
+					<div class="receipt-actions" style="margin-left: 30px; margin-top: -1px">
+							<button id="addRow" type="button" style="border-radius: 10px">
+								+ Dodaj pozycję
+							</button>
+						</div>	
+					</div>
+					<section class="payment-info">
+					<div class="payment-row" style="border-bottom:1px solid #bbb">
+						<strong>Zapłacono:</strong>
+						<span id="paidAmount" style="margin-left: 4px">0.00 PLN</span>
+					</div>
+					<div class="payment-row" style="border-bottom:1px solid #bbb">
+						<strong>Data sprzedaży:</strong>
+						<input
+							id="saleDate"
+							type="date">
+					</div>
+					<div class="payment-row" style="border-bottom:1px solid #bbb">
+						<strong>Forma płatności:</strong>
+						<select id="paymentMethod">
+							<option>Gotówka</option>
+							<option>Karta</option>
+							<option>Przelew</option>
+							<option>BLIK</option>
+						</select>
+					</div>
+					</section>
+					<div class="signatureSection" style="margin-top: 20px" >
+
+						<div class="signatureBox" style="margin-left: 50px">
+
+							<label>Wystawił(a)</label>
+
+							<div
+								class="signatureInput"
+								contenteditable="true"
+								spellcheck="false"
+								
+								data-placeholder="Wpisz nazwisko...">
+							</div>
+
+						</div>
+
+						<div class="signatureBox" style="margin-right: 50px">
+
+							<label>Odebrał(a)</label>
+
+							<div
+								class="signatureInput"
+								contenteditable="true"
+								spellcheck="false"
+								data-placeholder="Wpisz nazwisko...">
+							</div>
+
+						</div>
+
+					</div>
+				</section>
+		</article>
+	</section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
