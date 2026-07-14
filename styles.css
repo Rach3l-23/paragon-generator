@@ -148,9 +148,6 @@ background-size:175mm;
     padding:0;
 
 }
-.payment-row input{
-    display:none !important;
-}
 
 .signatureInput:empty::before{
 
@@ -235,6 +232,9 @@ background-size:175mm;
     page-break-after: auto;
     break-after: auto;
   }
+	.payment-row input{
+    display:none !important;
+}
 }
 .receipt-body{
     display:flex;
