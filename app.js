@@ -411,7 +411,7 @@ function preparePrintView() {
 
     input.after(span);
 
-    input.remove();
+    input.style.display = "none";
 
 });
 	// Forma płatności
