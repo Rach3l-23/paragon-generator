@@ -513,7 +513,7 @@ printPdf.addEventListener("click", () => {
     setTimeout(() => {
         window.print();
         document.title = oldTitle;
-    }, 150);
+    }, 2000);
 
 });
 
