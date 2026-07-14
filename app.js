@@ -94,6 +94,7 @@ const totalBrutto = document.querySelector("#totalBrutto");
 // DANE
 // ======================================
 let records = [];
+const printReplacements = [];
 // ======================================
 // OBSŁUGA CSV
 // ======================================
@@ -181,17 +182,12 @@ function loadCsv(text) {
 // POMOCNICZE
 // ======================================
 function updateReceiptDate() {
-
     const today = new Date();
-
     const dd = String(today.getDate()).padStart(2, "0");
     const mm = String(today.getMonth() + 1).padStart(2, "0");
     const yyyy = today.getFullYear();
-
-    const saleDate = document.querySelector("#saleDate");
-
-    saleDate.value = `${dd}.${mm}.${yyyy}`;
-
+	const saleDate = document.querySelector("#saleDate");
+saleDate.value = new Date().toISOString().split("T")[0];
     receiptDate.textContent = `${dd}.${mm}.${yyyy}`;
 }
 function updateReceiptNumber() {
@@ -407,14 +403,23 @@ function preparePrintView() {
 	document.querySelectorAll(".saleDateInput").forEach(input => {
 
 		const span = document.createElement("span");
-
 		span.className = "printDateValue";
 
-		span.textContent = input.value;
+		const [year, month, day] = input.value.split("-");
+		span.textContent = `${day}.${month}.${year}`;
 
-		input.after(span);
+		const parent = input.parentNode;
+		const nextSibling = input.nextSibling;
 
-		input.style.display = "none";
+		printReplacements.push({
+			input,
+			span,
+			parent,
+			nextSibling
+		});
+
+		parent.replaceChild(span, input);
+
 	});
 	// Forma płatności
 	document.querySelectorAll(".paymentSelect").forEach(select => {
@@ -433,22 +438,34 @@ function preparePrintView() {
 }
 function restorePrintView() {
 
+    // Produkty i ilości
     document.querySelectorAll(".printSelectValue").forEach(span => span.remove());
 
     document.querySelectorAll(".productSelect, .quantitySelect").forEach(select => {
         select.style.display = "";
     });
 
-    document.querySelectorAll(".printDateValue, .printPaymentValue")
-        .forEach(span => span.remove());
-
-    document.querySelectorAll(".saleDateInput").forEach(input => {
-    input.style.display = "";
-});
+    // Forma płatności
+    document.querySelectorAll(".printPaymentValue").forEach(span => span.remove());
 
     document.querySelectorAll(".paymentSelect").forEach(select => {
         select.style.display = "";
     });
+
+    // Data sprzedaży
+    printReplacements.forEach(item => {
+
+        if (item.nextSibling) {
+            item.parent.insertBefore(item.input, item.nextSibling);
+        } else {
+            item.parent.appendChild(item.input);
+        }
+
+        item.span.remove();
+
+    });
+
+    printReplacements.length = 0;
 
 }
 function validateReceipt() {
