@@ -232,6 +232,9 @@ background-size:175mm;
     page-break-after: auto;
     break-after: auto;
   }
+	.printDateValue{
+    grid-column:2;
+}
 }
 .receipt-body{
     display:flex;
