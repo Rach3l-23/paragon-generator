@@ -181,12 +181,17 @@ function loadCsv(text) {
 // POMOCNICZE
 // ======================================
 function updateReceiptDate() {
+
     const today = new Date();
+
     const dd = String(today.getDate()).padStart(2, "0");
     const mm = String(today.getMonth() + 1).padStart(2, "0");
     const yyyy = today.getFullYear();
-	const saleDate = document.querySelector("#saleDate");
-saleDate.value = new Date().toISOString().split("T")[0];
+
+    const saleDate = document.querySelector("#saleDate");
+
+    saleDate.value = `${dd}.${mm}.${yyyy}`;
+
     receiptDate.textContent = `${dd}.${mm}.${yyyy}`;
 }
 function updateReceiptNumber() {
@@ -401,19 +406,16 @@ function preparePrintView() {
 	// Data sprzedaży
 	document.querySelectorAll(".saleDateInput").forEach(input => {
 
-    const span = document.createElement("span");
+		const span = document.createElement("span");
 
-    span.className = "printDateValue";
+		span.className = "printDateValue";
 
-    const [year, month, day] = input.value.split("-");
+		span.textContent = input.value;
 
-    span.textContent = `${day}.${month}.${year}`;
+		input.after(span);
 
-    input.after(span);
-
-    input.style.display = "none";
-
-});
+		input.style.display = "none";
+	});
 	// Forma płatności
 	document.querySelectorAll(".paymentSelect").forEach(select => {
 
