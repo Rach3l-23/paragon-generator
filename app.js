@@ -405,14 +405,16 @@ function preparePrintView() {
 	const [year, month, day] = saleDate.value.split("-");
 	dateSpan.textContent = `${day}.${month}.${year}`;
 	saleDate.after(dateSpan);
-	saleDate.style.display = "none";
+	saleDate.style.visibility = "hidden";
+saleDate.style.position = "absolute";
 	// Forma płatności
 	const payment = document.querySelector("#paymentMethod");
 	const paymentSpan = document.createElement("span");
 	paymentSpan.className = "printPaymentValue";
 	paymentSpan.textContent = payment.options[payment.selectedIndex].text;
 	payment.after(paymentSpan);
-	payment.style.display = "none";
+	payment.style.visibility = "hidden";
+payment.style.position = "absolute";
 }
 function restorePrintView() {
     document.querySelectorAll(".printSelectValue").forEach(span => span.remove());
@@ -421,8 +423,13 @@ function restorePrintView() {
     });
 	document.querySelectorAll(".printDateValue, .printPaymentValue")
     .forEach(span => span.remove());
-	document.querySelector("#saleDate").style.display = "";
-	document.querySelector("#paymentMethod").style.display = "";
+	const saleDate = document.querySelector("#saleDate");
+saleDate.style.visibility = "";
+saleDate.style.position = "";
+
+const payment = document.querySelector("#paymentMethod");
+payment.style.visibility = "";
+payment.style.position = "";
 }
 function validateReceipt() {
 
